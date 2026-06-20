@@ -251,6 +251,71 @@
   }
   .rf-bullet { color: var(--red); flex-shrink: 0; margin-top: 2px; }
 
+  /* READINESS DASHBOARD */
+  .readiness-empty {
+    text-align: center; padding: 60px 24px; max-width: 620px; margin: 0 auto;
+  }
+  .readiness-empty-icon { font-size: 40px; margin-bottom: 14px; }
+  .readiness-empty-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .readiness-empty-text { font-size: 13.5px; color: var(--text2); line-height: 1.7; }
+  .readiness-empty-text strong { color: var(--gold); font-weight: 600; }
+
+  .rd-summary {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px;
+  }
+  .rd-summary-card {
+    flex: 1; min-width: 160px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 20px 22px;
+  }
+  .rd-summary-card.headline { border-color: rgba(201,168,76,0.35); background: linear-gradient(135deg, var(--bg2), rgba(201,168,76,0.05)); }
+  .rd-summary-num { font-size: 34px; font-weight: 800; line-height: 1; }
+  .rd-summary-tier { font-size: 13px; font-weight: 700; margin-top: 8px; }
+  .rd-summary-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 6px; }
+
+  .rd-bars-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text3); margin: 0 0 14px 2px;
+  }
+  .rd-bar-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .rd-bar-row:last-child { border-bottom: none; }
+  .rd-bar-label { width: 200px; min-width: 200px; font-size: 13px; color: var(--text); font-weight: 500; }
+  .rd-bar-track {
+    flex: 1; height: 12px; background: var(--bg3);
+    border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .rd-bar-fill { height: 100%; border-radius: 8px; transition: width 0.5s ease; }
+  .rd-bar-meta { width: 130px; min-width: 130px; text-align: right; font-size: 12px; color: var(--text2); }
+  .rd-bar-score { font-weight: 700; }
+  .rd-bar-attempts { color: var(--text3); }
+  .rd-bar-empty .rd-bar-meta { color: var(--text3); font-style: italic; }
+
+  .readiness-reset {
+    margin-top: 28px; background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text2); padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+  }
+  .readiness-reset:hover { border-color: var(--red); color: #ff6b6b; }
+
+  /* AI fallback paste-back box */
+  .ai-pasteback { margin-top: 16px; }
+  .ai-pasteback-label { font-size: 12px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .ai-pasteback textarea {
+    width: 100%; min-height: 90px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 11px; color: var(--text); font-size: 12.5px; line-height: 1.55;
+    font-family: inherit; resize: vertical;
+  }
+  .ai-pasteback textarea:focus { outline: none; border-color: var(--border2); }
+  .ai-pasteback-btn {
+    margin-top: 8px; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.4);
+    color: var(--green); padding: 9px 16px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .ai-pasteback-msg { font-size: 12.5px; margin-top: 8px; line-height: 1.5; }
+
   /* PRACTICE MODAL */
   #modal-overlay {
     display: none; position: fixed; inset: 0;
@@ -358,6 +423,7 @@
     <button class="nav-btn" onclick="showSection('frameworks', this)">Frameworks</button>
     <button class="nav-btn" onclick="showSection('battlecard', this)">Battlecard</button>
     <button class="nav-btn" onclick="showSection('redflags', this)">Red Flags</button>
+    <button class="nav-btn" onclick="showSection('readiness', this)">Readiness</button>
   </nav>
 </div>
 
@@ -384,6 +450,7 @@
       <div class="sidebar-link" onclick="showSection('frameworks', null, this)"><span class="icon">🧮</span>Frameworks</div>
       <div class="sidebar-link" onclick="showSection('battlecard', null, this)"><span class="icon">⚡</span>Battlecard</div>
       <div class="sidebar-link" onclick="showSection('redflags', null, this)"><span class="icon">🚩</span>Red Flags</div>
+      <div class="sidebar-link" onclick="showSection('readiness', null, this)"><span class="icon">🏁</span>Readiness</div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Categories</div>
@@ -456,6 +523,27 @@
         <div class="section-desc">The specific answers and behaviors that eliminate Finance LDP candidates — including weak modeling intuition, inability to connect numbers to business outcomes, poor business partnering instincts, and shallow risk awareness.</div>
       </div>
       <div class="rf-grid" id="rf-grid"></div>
+    </div>
+
+    <!-- READINESS DASHBOARD -->
+    <div id="section-readiness" class="section">
+      <div class="section-header">
+        <div class="section-title">Readiness Dashboard</div>
+        <div class="section-desc">Your readiness builds as you practice. Each time you get AI coaching feedback, its readiness score is logged to the question's category — so you can see, at a glance, which finance areas are interview-ready and which need more reps.</div>
+      </div>
+
+      <div id="readiness-summary"></div>
+      <div id="readiness-bars"></div>
+
+      <div id="readiness-empty" class="readiness-empty">
+        <div class="readiness-empty-icon">🏁</div>
+        <div class="readiness-empty-title">No readiness data yet</div>
+        <div class="readiness-empty-text">Open any question, tap <strong>Practice This Question</strong>, and get AI coaching feedback. When the live coach is available, your score is logged automatically. When you use the copy-the-prompt path, paste the coach's reply back into the box and tap <strong>Log Score</strong> — and it will appear here, tracked by category.</div>
+      </div>
+
+      <div id="readiness-controls" style="display:none;">
+        <button class="readiness-reset" onclick="resetReadiness()">↺ Reset all progress</button>
+      </div>
     </div>
 
   </div>
@@ -1186,6 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFrameworks();
   renderBattlecard();
   renderRedFlags();
+  renderReadiness();
   currentNavBtn = document.querySelector('.nav-btn.active');
   currentSidebarLink = document.querySelector('.sidebar-link.active');
 });
@@ -1207,6 +1296,8 @@ function showSection(name) {
     const oc = l.getAttribute('onclick') || '';
     l.classList.toggle('active', oc.includes("showSection('" + name + "'"));
   });
+  // Refresh the readiness dashboard each time it's opened so it reflects the latest logs
+  if (name === 'readiness') renderReadiness();
 }
 
 function filterCat(cat) {
@@ -1447,35 +1538,63 @@ async function getAIFeedback() {
   btn.textContent = '⏳ Generating coaching feedback...';
 
   const fillerTotal = Object.values(fillerCounts).reduce((a,b)=>a+b,0);
-  const fillerNote = fillerTotal > 0 ? `Note: ${fillerTotal} filler words detected: ${JSON.stringify(fillerCounts)}. Include the Filler Word Note section.` : 'No filler words detected. Omit the Filler Word Note section.';
+  const fillerNote = fillerTotal > 0 ? `Filler words detected this attempt: ${fillerTotal} total (${JSON.stringify(fillerCounts)}).` : 'No filler words were detected.';
 
-  const prompt = `You are an executive finance coach at the University of Utah David Eccles School of Business, evaluating an MBA student's answer to a Finance Leadership Development Program interview question.
+  const isBehavioral = currentModalQuestion.category === 'Behavioral & Career';
+  const evalLens = isBehavioral
+    ? 'This is a BEHAVIORAL / CAREER question. Weight, in order: (1) Structure — a clear arc (Context to Action to Result, or STAR); (2) Specificity — a real, concrete example rather than vague generalities; (3) Quantified impact — numbers, outcomes, and scale; (4) Leadership and self-awareness signal; (5) Tailoring to a Finance LDP and an Eccles MBA narrative.'
+    : 'This is a TECHNICAL finance question. Weight, in order: (1) Conceptual accuracy — is the finance correct; (2) Precision — correct terminology, formulas, and metrics used cleanly; (3) Depth appropriate to the difficulty level; (4) Business connection — does the candidate tie the numbers to a real business decision or implication; (5) Structure — a confident, well-sequenced explanation that leads with the headline.';
 
-Interview Question: "${currentModalQuestion.question}"
+  const prompt = `You are a senior finance interview coach at the University of Utah David Eccles School of Business. You prepare MBA students for Finance Leadership Development Program (LDP) interviews at companies such as Amazon, GE, AT&T, Boeing, Honeywell, and Johnson & Johnson. You are candid, specific, and developmental: you never inflate your assessment, and you always show the student exactly how to get better rather than just telling them.
 
-Model Conversational Answer: "${currentModalQuestion.conversational}"
+QUESTION (Category: ${currentModalQuestion.category} | Difficulty: ${currentModalQuestion.difficulty}):
+"${currentModalQuestion.question}"
 
-Deep Dive Context: "${currentModalQuestion.deepdive}"
+GOLD-STANDARD ANSWER (what a strong candidate sounds like):
+"${currentModalQuestion.conversational}"
 
-Student's Answer: "${userAnswer}"
+ADDITIONAL DEPTH (source material for the Standout Move):
+"${currentModalQuestion.deepdive}"
 
-${fillerNote}
+WHAT INTERVIEWERS PENALIZE ON THIS QUESTION:
+"${currentModalQuestion.redFlag}"
 
-Evaluate using this EXACT format:
+STUDENT'S ACTUAL ANSWER (transcribed or typed):
+"${userAnswer}"
 
-**What Worked**
-[1-2 specific strengths — cite exactly what the student said, not generic praise]
+DELIVERY DATA: ${fillerNote}
 
-**Top 2 Improvements**
-1. [Most critical gap vs. the model answer + how to fix it with specific language the student can use]
-2. [Second gap + actionable fix with example phrasing]
+EVALUATION LENS: ${evalLens}
 
-**Power Move**
-[One advanced finance insight from the deep-dive notes that would elevate this answer to the top 10% of candidates]
+Calibrate your bar to the ${currentModalQuestion.difficulty} difficulty — be demanding on Advanced questions and reward solid fundamentals on Foundational ones. Compare the student's answer against the gold standard and against what interviewers penalize.
 
-${fillerTotal > 0 ? '**Filler Word Note**\n[Specific note on filler words detected and how to reduce them in a live interview]' : ''}
+Respond in EXACTLY this structure and nothing more. Keep it tight — the student is reading between practice reps. Quote or paraphrase the student's own words so the feedback is unmistakably about THIS answer.
 
-Be direct, specific, and coach-like. Do not be generic. Reference what the student actually said.`;
+**Readiness: [Not Yet | Approaching | Interview-Ready | Standout]**
+One sentence on where this answer stands and the single biggest reason why.
+
+**What Landed**
+One or two specific strengths, anchored to what the student actually said. No generic praise.
+
+**Highest-Leverage Fixes**
+1. The most important gap versus the gold standard, then exactly how to close it — including a phrase the student could say out loud.
+2. The second gap, with a concrete, actionable fix.
+
+**Say It Like This**
+Take the weakest moment in the student's answer and rewrite it into one or two sentences of stronger, interview-ready phrasing they can rehearse.
+
+**Standout Move**
+One advanced insight drawn from the depth notes that would lift this into the top 10% of candidates, phrased as something they could naturally weave in.${fillerTotal > 0 ? `
+
+**Delivery Note**
+Address the ${fillerTotal} filler word(s) detected and give one specific tactic to tighten delivery in a live interview.` : ''}
+
+Do not add, rename, or skip sections. Everything must be specific to this student's answer.
+
+After all sections, on its own final line, output a machine-readable token in this EXACT format and nothing after it:
+[READINESS_SCORE: NN]
+where NN is an integer 0-100 reflecting this answer's readiness for this ${currentModalQuestion.difficulty}-level question, consistent with the tier you gave above (Not Yet 0-49, Approaching 50-69, Interview-Ready 70-84, Standout 85-100).`;
+
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1494,11 +1613,20 @@ Be direct, specific, and coach-like. Do not be generic. Reference what the stude
     const data = await response.json();
     const text = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : '';
     if (!text) throw new Error('Empty response');
-    document.getElementById('ai-text').textContent = text;
+    const score = parseReadinessScore(text);
+    const cleanText = stripScoreToken(text);
+    document.getElementById('ai-text').textContent = cleanText;
+    if (score !== null) {
+      recordReadiness(currentModalQuestion.category, score);
+      const note = document.createElement('div');
+      note.style.cssText = 'margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--green);';
+      note.textContent = '\u2713 Logged ' + score + '/100 to ' + currentModalQuestion.category + ' in your Readiness dashboard.';
+      document.getElementById('ai-text').appendChild(note);
+    }
     document.getElementById('ai-result').classList.add('visible');
   } catch (err) {
-    // Graceful fallback: live AI isn't reachable (expected on static/GitHub Pages
-    // deployments). Offer the fully-built prompt for the student to paste into Claude.
+    // When the live API call can't complete, offer the fully-built coaching
+    // prompt so the student can paste it into Claude and get the same feedback.
     showAIPromptFallback(prompt);
   }
 
@@ -1510,11 +1638,19 @@ function showAIPromptFallback(promptText) {
   const box = document.getElementById('ai-result');
   const txt = document.getElementById('ai-text');
   txt.innerHTML =
-    '<div style="margin-bottom:10px;color:var(--text2);line-height:1.6;">Live AI coaching isn\'t reachable from here (expected on a static deployment). Copy the prompt below into Claude.ai or any Claude chat to get the same structured feedback:</div>' +
+    '<div style="margin-bottom:10px;color:var(--text2);line-height:1.6;">Copy the prompt below into Claude.ai or any Claude chat to get structured coaching feedback on your answer:</div>' +
     '<textarea id="ai-fallback-prompt" readonly style="width:100%;min-height:170px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-size:12.5px;line-height:1.6;font-family:inherit;resize:vertical;"></textarea>' +
-    '<button id="ai-copy-btn" style="margin-top:10px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:9px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Copy Prompt</button>';
+    '<button id="ai-copy-btn" style="margin-top:10px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:9px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Copy Prompt</button>' +
+    '<div class="ai-pasteback">' +
+      '<div class="ai-pasteback-label">Track your progress</div>' +
+      '<div style="font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:8px;">Paste the coach\u2019s full reply here, then tap Log Score to record it to your Readiness dashboard.</div>' +
+      '<textarea id="ai-pasteback-input" placeholder="Paste the AI coaching response here..."></textarea>' +
+      '<button class="ai-pasteback-btn" id="ai-pasteback-btn">Log Score</button>' +
+      '<div class="ai-pasteback-msg" id="ai-pasteback-msg"></div>' +
+    '</div>';
   document.getElementById('ai-fallback-prompt').value = promptText;
   box.classList.add('visible');
+
   const copyBtn = document.getElementById('ai-copy-btn');
   copyBtn.addEventListener('click', () => {
     const ta = document.getElementById('ai-fallback-prompt');
@@ -1527,6 +1663,150 @@ function showAIPromptFallback(promptText) {
     copyBtn.textContent = 'Copied \u2713';
     setTimeout(() => { copyBtn.textContent = 'Copy Prompt'; }, 1800);
   });
+
+  const cat = currentModalQuestion ? currentModalQuestion.category : null;
+  document.getElementById('ai-pasteback-btn').addEventListener('click', () => {
+    const msg = document.getElementById('ai-pasteback-msg');
+    const pasted = document.getElementById('ai-pasteback-input').value;
+    const score = parseReadinessScore(pasted);
+    if (score === null) {
+      msg.style.color = 'var(--orange)';
+      msg.textContent = 'Couldn\u2019t find a score in that text. Make sure you pasted the full coach reply (it ends with a [READINESS_SCORE: NN] line).';
+      return;
+    }
+    if (cat) recordReadiness(cat, score);
+    msg.style.color = 'var(--green)';
+    msg.textContent = '\u2713 Logged ' + score + '/100 to ' + cat + '. Open the Readiness tab to see your progress.';
+  });
+}
+
+// ============================================================
+// READINESS DASHBOARD
+// ============================================================
+const READINESS_KEY = 'eccles_finance_ldp_readiness_v1';
+const FINANCE_CATEGORIES = ['Financial Modeling & Valuation','FP&A & Budgeting','Capital Allocation','Risk Management','Treasury & Cash Management','Accounting & Reporting','Strategic Finance','Behavioral & Career'];
+
+function readinessTier(score) {
+  if (score >= 85) return { label: 'Standout', color: '#22c55e' };
+  if (score >= 70) return { label: 'Interview-Ready', color: '#c9a84c' };
+  if (score >= 50) return { label: 'Approaching', color: '#f59e0b' };
+  return { label: 'Not Yet', color: '#ff6b6b' };
+}
+
+function parseReadinessScore(text) {
+  if (!text) return null;
+  const m = String(text).match(/\[\s*READINESS[_\s]?SCORE\s*:\s*(\d{1,3})\s*\]/i);
+  if (!m) return null;
+  let n = parseInt(m[1], 10);
+  if (isNaN(n)) return null;
+  return Math.max(0, Math.min(100, n));
+}
+
+function stripScoreToken(text) {
+  return String(text).replace(/\[\s*READINESS[_\s]?SCORE\s*:\s*\d{1,3}\s*\]/ig, '').trim();
+}
+
+function loadReadiness() {
+  try {
+    const raw = localStorage.getItem(READINESS_KEY);
+    if (!raw) return {};
+    const data = JSON.parse(raw);
+    return (data && data.categories) ? data.categories : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveReadiness(categories) {
+  try {
+    localStorage.setItem(READINESS_KEY, JSON.stringify({ version: 1, categories: categories }));
+  } catch (e) {
+    // Storage may be unavailable (e.g. sandboxed preview); fail silently so the
+    // rest of the tool keeps working. Persistence resumes on a normal deployment.
+  }
+}
+
+function recordReadiness(category, score) {
+  if (!category || score === null || score === undefined) return;
+  const cats = loadReadiness();
+  if (!cats[category]) cats[category] = { count: 0, sum: 0, last: null };
+  cats[category].count += 1;
+  cats[category].sum += score;
+  cats[category].last = score;
+  saveReadiness(cats);
+  renderReadiness();
+}
+
+function resetReadiness() {
+  if (!confirm('Reset all readiness progress? This clears every logged score and cannot be undone.')) return;
+  try { localStorage.removeItem(READINESS_KEY); } catch (e) {}
+  renderReadiness();
+}
+
+function renderReadiness() {
+  const cats = loadReadiness();
+  const tracked = FINANCE_CATEGORIES.filter(c => cats[c] && cats[c].count > 0);
+  const empty = document.getElementById('readiness-empty');
+  const summary = document.getElementById('readiness-summary');
+  const bars = document.getElementById('readiness-bars');
+  const controls = document.getElementById('readiness-controls');
+  if (!summary || !bars) return;
+
+  if (tracked.length === 0) {
+    empty.style.display = 'block';
+    summary.innerHTML = '';
+    bars.innerHTML = '';
+    controls.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  controls.style.display = 'block';
+
+  // Overall = average across all logged attempts (weighted by attempts)
+  let totalSum = 0, totalCount = 0;
+  FINANCE_CATEGORIES.forEach(c => { if (cats[c]) { totalSum += cats[c].sum; totalCount += cats[c].count; } });
+  const overall = totalCount ? Math.round(totalSum / totalCount) : 0;
+  const overallTier = readinessTier(overall);
+
+  summary.innerHTML =
+    '<div class="rd-summary">' +
+      '<div class="rd-summary-card headline">' +
+        '<div class="rd-summary-num" style="color:' + overallTier.color + '">' + overall + '<span style="font-size:16px;color:var(--text3);">/100</span></div>' +
+        '<div class="rd-summary-tier" style="color:' + overallTier.color + '">' + overallTier.label + '</div>' +
+        '<div class="rd-summary-label">Overall Readiness</div>' +
+      '</div>' +
+      '<div class="rd-summary-card">' +
+        '<div class="rd-summary-num" style="color:var(--text);">' + totalCount + '</div>' +
+        '<div class="rd-summary-label" style="margin-top:14px;">Practice Attempts Logged</div>' +
+      '</div>' +
+      '<div class="rd-summary-card">' +
+        '<div class="rd-summary-num" style="color:var(--text);">' + tracked.length + '<span style="font-size:16px;color:var(--text3);">/8</span></div>' +
+        '<div class="rd-summary-label" style="margin-top:14px;">Categories Practiced</div>' +
+      '</div>' +
+    '</div>';
+
+  let rows = '<div class="rd-bars-title">Readiness by Category</div>';
+  FINANCE_CATEGORIES.forEach(c => {
+    const d = cats[c];
+    if (d && d.count > 0) {
+      const avg = Math.round(d.sum / d.count);
+      const tier = readinessTier(avg);
+      rows +=
+        '<div class="rd-bar-row">' +
+          '<div class="rd-bar-label">' + c + '</div>' +
+          '<div class="rd-bar-track"><div class="rd-bar-fill" style="width:' + avg + '%;background:' + tier.color + ';"></div></div>' +
+          '<div class="rd-bar-meta"><span class="rd-bar-score" style="color:' + tier.color + '">' + avg + '</span> · <span class="rd-bar-attempts">' + d.count + ' rep' + (d.count !== 1 ? 's' : '') + '</span></div>' +
+        '</div>';
+    } else {
+      rows +=
+        '<div class="rd-bar-row rd-bar-empty">' +
+          '<div class="rd-bar-label" style="color:var(--text3);">' + c + '</div>' +
+          '<div class="rd-bar-track"></div>' +
+          '<div class="rd-bar-meta">no reps yet</div>' +
+        '</div>';
+    }
+  });
+  bars.innerHTML = rows;
 }
 </script>
 </body>

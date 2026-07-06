@@ -1,10 +1,14 @@
 # Finance Leadership Interview Playbook — User Manual
 
-**Eccles MBA · Finance Leadership · LDP Interview Preparation**
+**Full-Time MBA Program · David Eccles School of Business · Finance Leadership · LDP Interview Preparation**
 
 A self-contained preparation tool for MBA students recruiting into Finance Leadership Development Programs (LDPs) and rotational programs at companies like Amazon, GE, AT&T, Boeing, Honeywell, and Johnson & Johnson. It pairs a 100-question technical bank with model answers, core frameworks, a battlecard, recruiter red flags, an AI practice coach, and a readiness dashboard that tracks your progress by category.
 
-> **Live tool:** open `index.html` in any modern browser, or visit your GitHub Pages URL. Chrome or Edge are recommended for the voice features.
+---
+
+## Live Link
+
+[https://coryjburk.github.io/intv-playbook-finc_ldp/]
 
 ---
 

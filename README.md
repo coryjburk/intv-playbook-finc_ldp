@@ -8,7 +8,7 @@ A self-contained preparation tool for MBA students recruiting into Finance Leade
 
 ## Live Link
 
-[https://coryjburk.github.io/intv-playbook-finc_ldp/]
+[[Intv Playbook – Finance LDP (vC)]](https://coryjburk.github.io/intv-playbook-finc_ldp/)
 
 ---
 

@@ -6,9 +6,7 @@ A self-contained preparation tool for MBA students recruiting into Finance Leade
 
 ---
 
-## Live Link
-
-[[Intv Playbook – Finance LDP (vC)]](https://coryjburk.github.io/intv-playbook-finc_ldp/)
+## **▶ Live tool:** **[[Intv Playbook – Finance LDP (vC)]](https://coryjburk.github.io/intv-playbook-finc_ldp/)**
 
 ---
 
@@ -244,3 +242,8 @@ There's a Behavioral & Career category for completeness, and the coach can evalu
 ---
 
 <sub>Eccles MBA — Finance Leadership Interview Playbook · User Manual · University of Utah David Eccles School of Business</sub>
+
+---
+
+Developed by Cory Burk, Senior Manager, Program Management · Full-Time MBA Program · David Eccles School of Business.
+© 2026 University of Utah, David Eccles School of Business. All rights reserved.

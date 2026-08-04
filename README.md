@@ -1,4 +1,4 @@
-# Finance Leadership Interview Playbook — User Manual
+# Finance Leadership Interview Playbook - Tool & User Manual
 
 **Full-Time MBA Program · David Eccles School of Business · Finance Leadership · LDP Interview Preparation**
 
